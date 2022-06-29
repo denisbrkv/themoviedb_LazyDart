@@ -25,7 +25,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/auth',
       onGenerateRoute: (RouteSettings settings) {
         return MaterialPageRoute<void>(builder: (context) {
-          return Text('dsada');
+          return Scaffold(
+              body: Center(child: Text('Произошла ошибка навигации')));
         });
       },
     );
