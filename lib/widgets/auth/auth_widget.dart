@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
+import '../../Theme/app_button_style.dart';
+
 class AuthWidget extends StatefulWidget {
   AuthWidget({Key? key}) : super(key: key);
 
@@ -36,17 +38,29 @@ class _HeaderWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _FormWidget(),
           SizedBox(height: 15),
           Text(
-            'Чтобы пользоваться правкой и возможностями рейтинга TMDB, а также получить персональные рекомендации, необходимо войти в свою учётную запись. Если у вас нет учётной записи, её регистрация является бесплатной и простой. Нажмите здесь, чтобы начать.',
+            'Чтобы пользоваться правкой и возможностями рейтинга TMDB, а также получить персональные рекомендации, необходимо войти в свою учётную запись. Если у вас нет учётной записи, её регистрация является бесплатной и простой.',
             style: textStyle,
           ),
-          SizedBox(height: 20),
+          SizedBox(height: 10),
+          TextButton(
+            child: Text('Регистрация'),
+            onPressed: () {},
+            style: AppButtonStyle.linkbutton,
+          ),
+          SizedBox(height: 10),
           Text(
               'Если Вы зарегистрировались, но не получили письмо для подтверждения, нажмите здесь, чтобы отправить письмо повторно.',
               style: textStyle),
+          TextButton(
+            child: Text('Верификация аккаунта'),
+            onPressed: () {},
+            style: AppButtonStyle.linkbutton,
+          ),
         ],
       ),
     );
@@ -77,7 +91,7 @@ class _FormWidgetState extends State<_FormWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: 25),
+        SizedBox(height: 30),
         Text('Имя пользователя', style: textStyle),
         SizedBox(height: 5),
         TextField(
@@ -108,11 +122,7 @@ class _FormWidgetState extends State<_FormWidget> {
             TextButton(
               child: Text('Сбросить пароль'),
               onPressed: () {},
-              style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all(colotTextField),
-                textStyle: MaterialStateProperty.all(
-                    TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
-              ),
+              style: AppButtonStyle.linkbutton,
             ),
           ],
         ),
