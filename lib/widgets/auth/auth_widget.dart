@@ -109,7 +109,8 @@ class _FormWidgetState extends State<_FormWidget> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(height: 15),
-        if (errorText != null) Text(errorText),
+        if (errorText != null)
+          Text(errorText, style: TextStyle(color: Colors.red, fontSize: 16)),
         SizedBox(height: 15),
         Text('Имя пользователя', style: textStyle),
         SizedBox(height: 5),
@@ -127,7 +128,7 @@ class _FormWidgetState extends State<_FormWidget> {
         SizedBox(height: 25),
         Row(
           children: [
-            TextButton(
+            ElevatedButton(
               child: Text('Войти'),
               onPressed: _auth,
               style: ButtonStyle(
