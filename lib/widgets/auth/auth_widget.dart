@@ -1,7 +1,4 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-
 import '../../Theme/app_button_style.dart';
 
 class AuthWidget extends StatefulWidget {
@@ -75,6 +72,26 @@ class _FormWidget extends StatefulWidget {
 }
 
 class _FormWidgetState extends State<_FormWidget> {
+  final _loginTextController = TextEditingController();
+  final _passwordTextController = TextEditingController();
+  String? errorText = null;
+
+  void _auth() {
+    final login = _loginTextController.text;
+    final password = _passwordTextController.text;
+    if (login == 'admin' && password == 'admin') {
+      errorText = null;
+      print('open app');
+    } else {
+      errorText = 'Неверный логин или пароль';
+    }
+    setState(() {});
+  }
+
+  void _resetPassword() {
+    print('Сброс пароля');
+  }
+
   @override
   Widget build(BuildContext context) {
     final textStyle = const TextStyle(
@@ -87,20 +104,24 @@ class _FormWidgetState extends State<_FormWidget> {
       contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 12),
       isCollapsed: true,
     );
-
+    final errorText = this.errorText;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: 30),
+        SizedBox(height: 15),
+        if (errorText != null) Text(errorText),
+        SizedBox(height: 15),
         Text('Имя пользователя', style: textStyle),
         SizedBox(height: 5),
         TextField(
           decoration: textFieldDecoration,
+          controller: _loginTextController,
         ),
         SizedBox(height: 15),
         Text('Пароль', style: textStyle),
         SizedBox(height: 5),
         TextField(
+          controller: _passwordTextController,
           decoration: textFieldDecoration,
         ),
         SizedBox(height: 25),
@@ -108,7 +129,7 @@ class _FormWidgetState extends State<_FormWidget> {
           children: [
             TextButton(
               child: Text('Войти'),
-              onPressed: () {},
+              onPressed: _auth,
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(colotTextField),
                 foregroundColor: MaterialStateProperty.all(Colors.white),
@@ -121,7 +142,7 @@ class _FormWidgetState extends State<_FormWidget> {
             SizedBox(width: 25),
             TextButton(
               child: Text('Сбросить пароль'),
-              onPressed: () {},
+              onPressed: _resetPassword,
               style: AppButtonStyle.linkbutton,
             ),
           ],
