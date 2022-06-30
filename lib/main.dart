@@ -19,10 +19,10 @@ class MyApp extends StatelessWidget {
         ),
       ),
       routes: {
-        '/auth': (context) => AuthWidget(),
+        '/': (context) => AuthWidget(),
         '/main_screen': ((context) => MainScreenWidget()),
       },
-      initialRoute: '/auth',
+      initialRoute: '/',
       onGenerateRoute: (RouteSettings settings) {
         return MaterialPageRoute<void>(builder: (context) {
           return Scaffold(
