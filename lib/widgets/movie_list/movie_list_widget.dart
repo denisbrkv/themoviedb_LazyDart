@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
 class Movie {
+  final int id;
   final String imageName;
   final String title;
   final String time;
   final String description;
 
   Movie(
-      {required this.imageName,
+      {required this.id,
+      required this.imageName,
       required this.title,
       required this.time,
       required this.description});
@@ -23,32 +25,37 @@ class MovieListWidget extends StatefulWidget {
 class _MovieListWidgetState extends State<MovieListWidget> {
   final _movies = [
     Movie(
+        id: 1,
         imageName: 'images/movie_placeholder.png',
-        title: 'Смертельная битва',
+        title: 'Elvis',
         time: 'April 7, 2021',
         description:
             'Set in ninth-century China during a time of unrest that would eventually lead to the decline of the Tand Dynasty, "The Assassin" tells the story of Nie Yinniang (Shu Qui), who was kidnapped by her family when she was only 10 by Jiaxin (Sheu Fang-yi), a nun who trained her to become a brutally efficient assassin'),
     Movie(
+        id: 2,
         imageName: 'images/movie_placeholder.png',
-        title: 'Дашка ',
+        title: 'Top Gun: Maverick',
         time: 'April 7, 2021',
         description:
             'Set in ninth-century China during a time of unrest that would eventually lead to the decline of the Tand Dynasty, "The Assassin" tells the story of Nie Yinniang (Shu Qui), who was kidnapped by her family when she was only 10 by Jiaxin (Sheu Fang-yi), a nun who trained her to become a brutally efficient assassin'),
     Movie(
+        id: 3,
         imageName: 'images/movie_placeholder.png',
-        title: 'Какашка',
+        title: 'Doctor Strange in the Multiverse of Madness',
         time: 'April 7, 2021',
         description:
             'Set in ninth-century China during a time of unrest that would eventually lead to the decline of the Tand Dynasty, "The Assassin" tells the story of Nie Yinniang (Shu Qui), who was kidnapped by her family when she was only 10 by Jiaxin (Sheu Fang-yi), a nun who trained her to become a brutally efficient assassin'),
     Movie(
+        id: 4,
         imageName: 'images/movie_placeholder.png',
-        title: 'Антилопа гну',
+        title: 'Thor: Love and Thunder',
         time: 'April 7, 2021',
         description:
             'Set in ninth-century China during a time of unrest that would eventually lead to the decline of the Tand Dynasty, "The Assassin" tells the story of Nie Yinniang (Shu Qui), who was kidnapped by her family when she was only 10 by Jiaxin (Sheu Fang-yi), a nun who trained her to become a brutally efficient assassin'),
     Movie(
+        id: 5,
         imageName: 'images/movie_placeholder.png',
-        title: 'Смертельная битва',
+        title: 'The Black Phone',
         time: 'April 7, 2021',
         description:
             'Set in ninth-century China during a time of unrest that would eventually lead to the decline of the Tand Dynasty, "The Assassin" tells the story of Nie Yinniang (Shu Qui), who was kidnapped by her family when she was only 10 by Jiaxin (Sheu Fang-yi), a nun who trained her to become a brutally efficient assassin'),
@@ -73,8 +80,16 @@ class _MovieListWidgetState extends State<MovieListWidget> {
   @override
   void initState() {
     super.initState();
-
+    _filteredMovies = _movies;
     _searchController.addListener(_searchMovies);
+  }
+
+  void _onMovieTap(int index) {
+    final id = _movies[index].id;
+    Navigator.of(context).pushNamed(
+      'main_screen/movie_details',
+      arguments: id,
+    );
   }
 
   @override
@@ -144,9 +159,7 @@ class _MovieListWidgetState extends State<MovieListWidget> {
                       color: Colors.transparent,
                       child: InkWell(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
-                        onTap: () {
-                          print('11');
-                        },
+                        onTap: () => _onMovieTap(index),
                       ),
                     )
                   ],
